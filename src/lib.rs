@@ -1,4 +1,4 @@
-//! # Gullwing
+//! # gullwing
 //!
 //! Runtime formatting and parsing with Python's Format Specification Mini-Language.
 //!

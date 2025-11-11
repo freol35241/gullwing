@@ -1,4 +1,4 @@
-# Gullwing
+# gullwing
 
 [![Crates.io](https://img.shields.io/crates/v/gullwing.svg)](https://crates.io/crates/gullwing)
 [![Documentation](https://docs.rs/gullwing/badge.svg)](https://docs.rs/gullwing)
@@ -6,7 +6,7 @@
 
 Runtime formatting and parsing with Python's [Format Specification Mini-Language](https://docs.python.org/3/library/string.html#formatspec).
 
-Gullwing brings Python-style string formatting and parsing to Rust, enabling you to:
+gullwing brings Python-style string formatting and parsing to Rust, enabling you to:
 - **Format** values at runtime using format strings (like Python's `format()` and `str.format()`)
 - **Parse** structured data from strings (like Python's [`parse`](https://github.com/r1chardj0n3s/parse) package)
 
@@ -60,7 +60,7 @@ assert_eq!(result.get("age").unwrap().as_int(), Some(30));
 
 ## Format Specification Mini-Language
 
-Gullwing implements Python's format specification syntax:
+gullwing implements Python's format specification syntax:
 
 ```
 [[fill]align][sign][z][#][0][width][grouping][.precision][type]
@@ -147,7 +147,7 @@ if let Some(parsed) = parser.parse(csv_line)? {
 
 ### The Shuffle Tool
 
-Gullwing includes a `shuffle` example that replicates the functionality of the Python script from [RISE-Maritime/porla](https://github.com/RISE-Maritime/porla/blob/main/bin/shuffle):
+gullwing includes a `shuffle` example that demonstrates text transformation capabilities:
 
 ```bash
 # Build the example
@@ -221,7 +221,7 @@ assert_eq!(result, "2 + 3 = 5");
 "{name:>10} {value:05d}".format(name="Alice", value=42)
 ```
 
-**Rust with Gullwing:**
+**Rust with gullwing:**
 ```rust
 let formatter = Formatter::new("{name:>10} {value:05d}")?;
 let mut values = HashMap::new();
@@ -239,7 +239,7 @@ result = parse.parse("{name} is {age:d} years old", "Alice is 30 years old")
 print(result["name"], result["age"])
 ```
 
-**Rust with Gullwing:**
+**Rust with gullwing:**
 ```rust
 let parser = Parser::new("{name} is {age:d} years old")?;
 let result = parser.parse("Alice is 30 years old")?.unwrap();
@@ -250,7 +250,7 @@ println!("{} {}",
 
 ## Architecture
 
-Gullwing is built with:
+gullwing is built with:
 - **Hand-written format spec parser** for fast, accurate parsing of format specifications
 - **Regex-based text parsing** for efficient pattern matching (inspired by Python's parse package)
 - **Type-safe value system** with `Value` enum for runtime value handling
@@ -281,7 +281,7 @@ Licensed under the MIT license. See [LICENSE](LICENSE) for details.
 
 - Inspired by Python's [Format Specification Mini-Language](https://docs.python.org/3/library/string.html#formatspec)
 - Parse functionality inspired by Richard Jones' [`parse`](https://github.com/r1chardj0n3s/parse) package
-- Created to enable ergonomic data transformation tools like [RISE-Maritime/porla's shuffle script](https://github.com/RISE-Maritime/porla/blob/main/bin/shuffle)
+- Created to enable ergonomic data transformation tools in Rust
 
 ## See Also
 

@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This document outlines a detailed plan for implementing a Rust library (`gullwing`) that provides runtime formatting and parsing capabilities based on Python's Format Specification Mini-Language. The library will enable developers to write ergonomic data transformation tools similar to the `shuffle` script from RISE-Maritime/porla.
+This document outlines a detailed plan for implementing a Rust library (`gullwing`) that provides runtime formatting and parsing capabilities based on Python's Format Specification Mini-Language. The library will enable developers to write ergonomic data transformation tools.
 
 ## 1. Problem Domain Analysis
 
@@ -73,7 +73,7 @@ The `parse` package converts format strings to regex patterns:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                   Gullwing Library                   │
+│                   gullwing library                   │
 ├─────────────────────────────────────────────────────┤
 │                                                       │
 │  ┌─────────────────────────────────────────────┐   │
@@ -122,7 +122,7 @@ gullwing/
 │   │   └── conversions.rs     # From/Into implementations
 │   └── error.rs               # Error types
 ├── examples/
-│   ├── shuffle.rs             # CLI tool (like porla/bin/shuffle)
+│   ├── shuffle.rs             # CLI tool for text transformation
 │   ├── format_demo.rs         # Formatting examples
 │   └── parse_demo.rs          # Parsing examples
 └── tests/
@@ -390,13 +390,13 @@ pub enum Error {
 **Goal**: Demonstrate library with shuffle tool
 
 **Deliverables:**
-- [ ] `shuffle` CLI binary (like porla version)
+- [ ] `shuffle` CLI binary for text transformation
 - [ ] Log transformation examples
 - [ ] CSV reformatting examples
 - [ ] Documentation with use cases
 
 **Validation:**
-- Can replicate porla/shuffle functionality
+- Can perform flexible text transformation
 - Handles 100k lines/second
 
 ### Phase 6: Polish & Optimization (Week 8)
@@ -529,7 +529,7 @@ proptest! {
 
 **Version 1.0 is successful if:**
 1. ✅ Supports 90%+ of Python format spec mini-language
-2. ✅ Can replicate `porla/shuffle` functionality in Rust
+2. ✅ Can perform flexible text transformation with shuffle tool
 3. ✅ API is ergonomic (< 10 lines for common use cases)
 4. ✅ Performance within 2x of Python (faster expected)
 5. ✅ Comprehensive docs + examples

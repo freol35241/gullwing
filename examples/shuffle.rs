@@ -1,6 +1,6 @@
 //! A command-line tool for parsing and reformatting structured text.
 //!
-//! This is a Rust implementation inspired by the shuffle script from RISE-Maritime/porla.
+//! This tool demonstrates gullwing's parsing and formatting capabilities.
 //!
 //! # Usage
 //!

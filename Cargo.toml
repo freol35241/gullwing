@@ -1,0 +1,25 @@
+[package]
+name = "gullwing"
+version = "0.1.0"
+edition = "2021"
+authors = ["Fredrik Olsson <freol@outlook.com>"]
+license = "MIT"
+description = "Runtime formatting and parsing with Python's Format Specification Mini-Language"
+repository = "https://github.com/freol35241/gullwing"
+keywords = ["format", "parse", "string", "formatting", "parsing"]
+categories = ["parsing", "text-processing"]
+readme = "README.md"
+
+[dependencies]
+regex = "1.10"
+thiserror = "1.0"
+lazy_static = "1.4"
+
+[dev-dependencies]
+proptest = "1.4"
+criterion = "0.5"
+pretty_assertions = "1.4"
+
+[features]
+default = ["std"]
+std = []

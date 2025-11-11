@@ -66,9 +66,8 @@ fn bench_parse_findall(c: &mut Criterion) {
 
 fn bench_parse_complex_pattern(c: &mut Criterion) {
     c.bench_function("parse_complex_pattern", |b| {
-        let parser = Parser::new(
-            "Name: {name:<20} | Amount: {amount:>10,.2f} | ID: {id:#06x}"
-        ).unwrap();
+        let parser =
+            Parser::new("Name: {name:<20} | Amount: {amount:>10,.2f} | ID: {id:#06x}").unwrap();
         let text = "Name: Alice                | Amount:   1,234.56 | ID: 0x002a";
 
         b.iter(|| parser.parse(black_box(text)))
@@ -86,9 +85,7 @@ fn bench_parse_hex_number(c: &mut Criterion) {
 
 fn bench_parse_pattern_creation(c: &mut Criterion) {
     c.bench_function("parse_pattern_creation", |b| {
-        b.iter(|| {
-            Parser::new(black_box("Name: {name} | Value: {value:d}"))
-        })
+        b.iter(|| Parser::new(black_box("Name: {name} | Value: {value:d}")))
     });
 }
 

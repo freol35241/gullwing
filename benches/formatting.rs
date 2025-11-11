@@ -64,9 +64,8 @@ fn bench_format_hex_with_prefix(c: &mut Criterion) {
 
 fn bench_format_complex_pattern(c: &mut Criterion) {
     c.bench_function("format_complex_pattern", |b| {
-        let formatter = Formatter::new(
-            "Name: {name:<20} | Amount: {amount:>10,.2f} | ID: {id:#06x}"
-        ).unwrap();
+        let formatter =
+            Formatter::new("Name: {name:<20} | Amount: {amount:>10,.2f} | ID: {id:#06x}").unwrap();
         let mut values = HashMap::new();
         values.insert("name".to_string(), Value::Str("Alice".to_string()));
         values.insert("amount".to_string(), Value::Float(1234.56));
@@ -78,9 +77,7 @@ fn bench_format_complex_pattern(c: &mut Criterion) {
 
 fn bench_format_multiple_fields(c: &mut Criterion) {
     c.bench_function("format_multiple_fields", |b| {
-        let formatter = Formatter::new(
-            "{a} {b} {c} {d} {e} {f} {g} {h} {i} {j}"
-        ).unwrap();
+        let formatter = Formatter::new("{a} {b} {c} {d} {e} {f} {g} {h} {i} {j}").unwrap();
         let mut values = HashMap::new();
         for (i, ch) in "abcdefghij".chars().enumerate() {
             values.insert(ch.to_string(), Value::Int(i as i64));

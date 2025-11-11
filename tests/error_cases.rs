@@ -242,6 +242,14 @@ mod error_tests {
         // search() finds first match
         let search_result = parser.search("prefix 42 suffix").unwrap();
         assert!(search_result.is_some());
-        assert_eq!(search_result.unwrap().get("value").unwrap().as_int().unwrap(), 42);
+        assert_eq!(
+            search_result
+                .unwrap()
+                .get("value")
+                .unwrap()
+                .as_int()
+                .unwrap(),
+            42
+        );
     }
 }

@@ -1,11 +1,15 @@
-use std::process::{Command, Stdio};
 use std::io::Write;
+use std::process::{Command, Stdio};
 
 #[cfg(test)]
 mod integration_tests {
     use super::*;
 
-    fn run_shuffle(input_pattern: &str, output_pattern: &str, input_data: &str) -> Result<String, String> {
+    fn run_shuffle(
+        input_pattern: &str,
+        output_pattern: &str,
+        input_data: &str,
+    ) -> Result<String, String> {
         // Build the example first
         let build = Command::new("cargo")
             .args(&["build", "--example", "shuffle"])
@@ -13,7 +17,10 @@ mod integration_tests {
             .map_err(|e| format!("Failed to build shuffle example: {}", e))?;
 
         if !build.status.success() {
-            return Err(format!("Build failed: {}", String::from_utf8_lossy(&build.stderr)));
+            return Err(format!(
+                "Build failed: {}",
+                String::from_utf8_lossy(&build.stderr)
+            ));
         }
 
         // Run the shuffle example
@@ -28,16 +35,21 @@ mod integration_tests {
 
         // Write input data
         if let Some(mut stdin) = child.stdin.take() {
-            stdin.write_all(input_data.as_bytes())
+            stdin
+                .write_all(input_data.as_bytes())
                 .map_err(|e| format!("Failed to write to stdin: {}", e))?;
         }
 
         // Get output
-        let output = child.wait_with_output()
+        let output = child
+            .wait_with_output()
             .map_err(|e| format!("Failed to wait for shuffle: {}", e))?;
 
         if !output.status.success() {
-            return Err(format!("Shuffle failed: {}", String::from_utf8_lossy(&output.stderr)));
+            return Err(format!(
+                "Shuffle failed: {}",
+                String::from_utf8_lossy(&output.stderr)
+            ));
         }
 
         Ok(String::from_utf8_lossy(&output.stdout).to_string())
@@ -70,7 +82,10 @@ mod integration_tests {
         let data = "5,Alice,95.7\n10,Bob,87.3\n";
 
         let result = run_shuffle(input, output, data).unwrap();
-        assert_eq!(result, "ID: 005 | Name: Alice | Score: 95.7\nID: 010 | Name: Bob | Score: 87.3\n");
+        assert_eq!(
+            result,
+            "ID: 005 | Name: Alice | Score: 95.7\nID: 010 | Name: Bob | Score: 87.3\n"
+        );
     }
 
     #[test]

@@ -20,16 +20,17 @@ use std::collections::HashMap;
 /// ```
 #[derive(Debug, Clone)]
 pub struct Formatter {
+    #[allow(dead_code)]
     pattern: String,
     fields: Vec<Field>,
 }
 
 #[derive(Debug, Clone)]
 struct Field {
-    prefix: String,          // Text before the field
-    name: Option<String>,    // Field name (None for positional)
-    index: Option<usize>,    // Positional index
-    spec: FormatSpec,        // Format specification
+    prefix: String,       // Text before the field
+    name: Option<String>, // Field name (None for positional)
+    index: Option<usize>, // Positional index
+    spec: FormatSpec,     // Format specification
 }
 
 impl Formatter {
@@ -308,7 +309,7 @@ fn format_value(value: &Value, spec: &FormatSpec) -> Result<String> {
     use super::writer::*;
 
     // Determine the type of formatting to perform
-    let type_spec = spec.type_spec.unwrap_or_else(|| {
+    let type_spec = spec.type_spec.unwrap_or({
         // Default type based on value
         match value {
             Value::Str(_) | Value::Char(_) => TypeSpec::String,

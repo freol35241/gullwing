@@ -2,13 +2,13 @@
 
 use crate::error::{Error, Result};
 use crate::spec::{FormatSpec, TypeSpec};
-use std::collections::HashMap;
 
 /// Information about a capture group in a regex pattern.
 #[derive(Debug, Clone)]
 pub struct CaptureInfo {
     pub name: String,
     pub spec: FormatSpec,
+    #[allow(dead_code)]
     pub group_index: usize,
 }
 

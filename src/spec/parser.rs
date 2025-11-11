@@ -8,7 +8,7 @@ use crate::error::{Error, Result};
 /// Format: `[[fill]align][sign][z][#][0][width][grouping][.precision][type]`
 ///
 /// See: <https://docs.python.org/3/library/string.html#formatspec>
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Default)]
 pub struct FormatSpec {
     /// Fill character (default: space)
     pub fill: Option<char>,
@@ -30,23 +30,6 @@ pub struct FormatSpec {
     pub precision: Option<usize>,
     /// Type specifier
     pub type_spec: Option<TypeSpec>,
-}
-
-impl Default for FormatSpec {
-    fn default() -> Self {
-        FormatSpec {
-            fill: None,
-            align: None,
-            sign: None,
-            zero_flag: false,
-            alternate: false,
-            zero_pad: false,
-            width: None,
-            grouping: None,
-            precision: None,
-            type_spec: None,
-        }
-    }
 }
 
 impl FormatSpec {

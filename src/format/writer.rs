@@ -66,7 +66,6 @@ pub fn format_binary(value: &Value, spec: &FormatSpec) -> Result<String> {
         if let Some(width) = spec.width {
             let prefix_len = if spec.alternate && num != 0 { 2 } else { 0 };
             if result.len() < width {
-                let zeros = width - result.len();
                 if prefix_len > 0 {
                     result = format!("0b{:0>width$}", &result[2..], width = width - 2);
                 } else {
@@ -227,15 +226,10 @@ pub fn format_general(value: &Value, spec: &FormatSpec) -> Result<String> {
     }
 
     let precision = spec.precision.unwrap_or(6);
-    let uppercase = matches!(spec.type_spec, Some(TypeSpec::GeneralUpper));
 
     // For general format, let Rust's formatting decide
     let abs_num = num.abs();
-    let mut result = if uppercase {
-        format!("{:.precision$}", abs_num, precision = precision)
-    } else {
-        format!("{:.precision$}", abs_num, precision = precision)
-    };
+    let mut result = format!("{:.precision$}", abs_num, precision = precision);
 
     // Add sign
     result = add_sign_float(&result, num, spec);
@@ -304,7 +298,7 @@ fn apply_grouping(s: &str, grouping: Grouping, group_size: usize) -> String {
     let mut result = String::new();
 
     for (i, &c) in chars.iter().enumerate() {
-        if i > 0 && (chars.len() - i) % group_size == 0 {
+        if i > 0 && (chars.len() - i).is_multiple_of(group_size) {
             result.push(sep);
         }
         result.push(c);
@@ -381,11 +375,14 @@ fn apply_zero_padding(s: &str, width: usize) -> String {
     let (prefix, rest) = if let Some(first) = s.chars().next() {
         if first == '+' || first == '-' || first == ' ' {
             (first.to_string(), &s[1..])
-        } else if s.starts_with("0x") || s.starts_with("0X") {
-            (s[..2].to_string(), &s[2..])
-        } else if s.starts_with("0b") || s.starts_with("0B") {
-            (s[..2].to_string(), &s[2..])
-        } else if s.starts_with("0o") || s.starts_with("0O") {
+        } else if s.len() >= 2
+            && (s.starts_with("0x")
+                || s.starts_with("0X")
+                || s.starts_with("0b")
+                || s.starts_with("0B")
+                || s.starts_with("0o")
+                || s.starts_with("0O"))
+        {
             (s[..2].to_string(), &s[2..])
         } else {
             (String::new(), s)
@@ -395,7 +392,12 @@ fn apply_zero_padding(s: &str, width: usize) -> String {
     };
 
     let padding_needed = width.saturating_sub(s.len());
-    format!("{}{:0>width$}", prefix, rest, width = rest.len() + padding_needed)
+    format!(
+        "{}{:0>width$}",
+        prefix,
+        rest,
+        width = rest.len() + padding_needed
+    )
 }
 
 #[cfg(test)]

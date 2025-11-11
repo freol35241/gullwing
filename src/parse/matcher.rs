@@ -22,6 +22,7 @@ use std::collections::HashMap;
 /// ```
 #[derive(Debug, Clone)]
 pub struct Parser {
+    #[allow(dead_code)]
     pattern: String,
     regex: Regex,
     captures: Vec<CaptureInfo>,
@@ -213,7 +214,7 @@ fn convert_value(text: &str, spec: &crate::spec::FormatSpec) -> Result<Value> {
         TypeSpec::String => Ok(Value::Str(text.to_string())),
 
         TypeSpec::Decimal | TypeSpec::Number => {
-            let cleaned = text.replace(',', "").replace('_', "");
+            let cleaned = text.replace([',', '_'], "");
             cleaned
                 .parse::<i64>()
                 .map(Value::Int)

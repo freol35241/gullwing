@@ -2,7 +2,7 @@
 
 [![Crates.io](https://img.shields.io/crates/v/gullwing.svg)](https://crates.io/crates/gullwing)
 [![Documentation](https://docs.rs/gullwing/badge.svg)](https://docs.rs/gullwing)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Runtime formatting and parsing with Python's [Format Specification Mini-Language](https://docs.python.org/3/library/string.html#formatspec).
 
@@ -318,7 +318,7 @@ Contributions are welcome! Please feel free to submit issues or pull requests.
 
 ## License
 
-Licensed under the MIT license. See [LICENSE](LICENSE) for details.
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.
 
 ## Acknowledgments
 

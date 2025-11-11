@@ -23,3 +23,15 @@ pretty_assertions = "1.4"
 [features]
 default = ["std"]
 std = []
+
+[[bench]]
+name = "format_spec"
+harness = false
+
+[[bench]]
+name = "formatting"
+harness = false
+
+[[bench]]
+name = "parsing"
+harness = false

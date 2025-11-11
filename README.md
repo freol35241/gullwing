@@ -258,10 +258,53 @@ gullwing is built with:
 
 ## Performance
 
-- Format spec parsing: ~1µs per spec
-- Single format operation: ~100ns (comparable to `std::fmt`)
-- Single parse operation: ~10µs (including regex matching)
-- The shuffle tool can process ~100k lines/second
+Benchmarks run on an Intel x86_64 processor using criterion.rs. All operations are measured at runtime (no compile-time optimizations):
+
+### Format Specification Parsing
+
+| Operation | Time |
+|-----------|------|
+| Simple spec (`>10`) | ~26 ns |
+| Complex spec (`0<+#20,.2f`) | ~63 ns |
+| All features (`*>+z#030_,.6e`) | ~128 ns |
+
+### Formatting Operations
+
+| Operation | Time |
+|-----------|------|
+| Simple string | ~104 ns |
+| Integer | ~151 ns |
+| Integer with grouping | ~337 ns |
+| Float with precision | ~224 ns |
+| Aligned/padded string | ~175 ns |
+| Hex with prefix | ~160 ns |
+| Complex pattern (3 fields) | ~895 ns |
+| Multiple fields (10) | ~1.22 µs |
+
+### Parsing Operations
+
+| Operation | Time |
+|-----------|------|
+| Simple pattern | ~38.5 µs |
+| Integer | ~63.6 µs |
+| Float | ~151.7 µs |
+| Integer with grouping | ~32.0 µs |
+| Multiple fields (3) | ~197.6 µs |
+| Complex pattern | ~279 µs |
+| Search (first match) | ~489 ns |
+| FindAll (4 matches) | ~2.74 µs |
+| Pattern creation | ~61.5 µs |
+
+**Key Takeaways:**
+- Format specification parsing is **extremely fast** (sub-microsecond)
+- Formatting operations are **comparable to `std::fmt`** (nanoseconds)
+- Parsing includes regex compilation and matching, measured in microseconds
+- Pattern creation is one-time cost; reuse Parser instances for best performance
+
+Run benchmarks yourself:
+```bash
+cargo bench
+```
 
 ## Limitations
 

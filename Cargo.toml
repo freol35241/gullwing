@@ -1,9 +1,9 @@
 [package]
 name = "gullwing"
-version = "0.1.0"
+version = "0.9.0"
 edition = "2021"
 authors = ["Fredrik Olsson <freol@outlook.com>"]
-license = "MIT"
+license = "Apache-2.0"
 description = "Runtime formatting and parsing with Python's Format Specification Mini-Language"
 repository = "https://github.com/freol35241/gullwing"
 keywords = ["format", "parse", "string", "formatting", "parsing"]

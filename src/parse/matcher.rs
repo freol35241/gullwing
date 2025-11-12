@@ -25,6 +25,7 @@ pub struct Parser {
     #[allow(dead_code)]
     pattern: String,
     regex: Regex,
+    anchored_regex: Regex,
     captures: Vec<CaptureInfo>,
 }
 
@@ -50,9 +51,14 @@ impl Parser {
         let regex = Regex::new(&regex_pattern)
             .map_err(|e| Error::RegexError(format!("failed to compile regex: {}", e)))?;
 
+        let anchored_pattern = format!("^{}$", regex_pattern);
+        let anchored_regex = Regex::new(&anchored_pattern)
+            .map_err(|e| Error::RegexError(format!("failed to compile anchored regex: {}", e)))?;
+
         Ok(Parser {
             pattern: pattern.to_string(),
             regex,
+            anchored_regex,
             captures,
         })
     }
@@ -73,11 +79,7 @@ impl Parser {
     /// assert_eq!(result.get("y").unwrap().as_int(), Some(3));
     /// ```
     pub fn parse(&self, text: &str) -> Result<Option<ParseResult>> {
-        let full_regex = format!("^{}$", self.regex.as_str());
-        let full_regex = Regex::new(&full_regex)
-            .map_err(|e| Error::RegexError(format!("failed to compile regex: {}", e)))?;
-
-        if let Some(cap) = full_regex.captures(text) {
+        if let Some(cap) = self.anchored_regex.captures(text) {
             let values = self.extract_values(&cap)?;
             Ok(Some(ParseResult {
                 values,

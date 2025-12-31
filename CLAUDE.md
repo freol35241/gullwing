@@ -190,15 +190,30 @@ GitHub Actions workflow (`.github/workflows/ci.yml`):
 
 ## Release Checklist
 
-Before publishing to crates.io:
+The release workflow (`.github/workflows/release.yml`) automates publishing to crates.io.
+
+### Manual Steps
 1. [ ] Update version in `Cargo.toml`
 2. [ ] Update `CHANGELOG.md` with release notes
 3. [ ] Run full test suite: `cargo test --all-features`
 4. [ ] Run clippy: `cargo clippy --all-targets -- -D warnings`
 5. [ ] Build docs: `cargo doc --no-deps`
 6. [ ] Verify README examples work
-7. [ ] Create git tag: `git tag v0.x.0`
-8. [ ] Publish: `cargo publish`
+7. [ ] Commit version bump: `git commit -am "chore: release v0.x.0"`
+8. [ ] Create git tag: `git tag v0.x.0`
+9. [ ] Push tag: `git push origin v0.x.0`
+10. [ ] Create GitHub Release from the tag
+
+### Automated Steps (triggered by GitHub Release)
+- Full test suite runs
+- Version tag is verified against Cargo.toml
+- Crate is published to crates.io
+
+### Required Setup
+Add `CARGO_REGISTRY_TOKEN` secret to repository settings:
+1. Go to Settings > Secrets and variables > Actions
+2. Add new repository secret named `CARGO_REGISTRY_TOKEN`
+3. Value: Your crates.io API token (from https://crates.io/settings/tokens)
 
 ## Known Limitations
 

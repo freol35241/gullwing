@@ -56,7 +56,7 @@ jobs:
         run: cargo build --examples --verbose
 
   # Test minimum supported Rust version
-  # Note: Only verifies library compilation, not tests (dev-deps may require newer Rust)
+  # Note: Only verifies library compilation (dev-deps and examples may require newer Rust)
   msrv:
     name: MSRV (1.70)
     runs-on: ubuntu-latest
@@ -70,9 +70,6 @@ jobs:
 
       - name: Check library compiles
         run: cargo check --lib --verbose
-
-      - name: Check examples compile
-        run: cargo check --examples --verbose
 
   clippy:
     name: Clippy

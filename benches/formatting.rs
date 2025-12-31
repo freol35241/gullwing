@@ -36,7 +36,7 @@ fn bench_format_float_precision(c: &mut Criterion) {
     c.bench_function("format_float_precision", |b| {
         let formatter = Formatter::new("{value:.2f}").unwrap();
         let mut values = HashMap::new();
-        values.insert("value".to_string(), Value::Float(3.14159265));
+        values.insert("value".to_string(), Value::Float(std::f64::consts::PI));
 
         b.iter(|| formatter.format_map(black_box(&values)))
     });

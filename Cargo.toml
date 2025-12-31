@@ -2,10 +2,12 @@
 name = "gullwing"
 version = "0.9.0"
 edition = "2021"
+rust-version = "1.70"
 authors = ["Fredrik Olsson <freol@outlook.com>"]
 license = "Apache-2.0"
 description = "Runtime formatting and parsing with Python's Format Specification Mini-Language"
 repository = "https://github.com/freol35241/gullwing"
+documentation = "https://docs.rs/gullwing"
 keywords = ["format", "parse", "string", "formatting", "parsing"]
 categories = ["parsing", "text-processing"]
 readme = "README.md"
@@ -19,10 +21,6 @@ lazy_static = "1.4"
 proptest = "1.4"
 criterion = "0.5"
 pretty_assertions = "1.4"
-
-[features]
-default = ["std"]
-std = []
 
 [[bench]]
 name = "format_spec"

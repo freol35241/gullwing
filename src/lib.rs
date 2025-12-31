@@ -21,29 +21,31 @@
 //!
 //! ### Formatting
 //!
-//! ```rust,ignore
+//! ```
 //! use gullwing::{Formatter, Value};
+//! use std::collections::HashMap;
 //!
-//! let formatter = Formatter::new("{name:>10} {value:05d}")?;
-//! let output = formatter.format(&[
-//!     ("name", Value::Str("Alice")),
-//!     ("value", Value::Int(42))
-//! ])?;
-//! // Output: "     Alice 00042"
+//! let formatter = Formatter::new("{name:>10} {value:05d}").unwrap();
+//! let mut values = HashMap::new();
+//! values.insert("name".to_string(), Value::from("Alice"));
+//! values.insert("value".to_string(), Value::from(42));
+//! let output = formatter.format_map(&values).unwrap();
+//! assert_eq!(output, "     Alice 00042");
 //! ```
 //!
 //! ### Parsing
 //!
-//! ```rust,ignore
+//! ```
 //! use gullwing::Parser;
 //!
-//! let parser = Parser::new("{name} is {age:d} years old")?;
-//! let result = parser.parse("Alice is 30 years old")?;
+//! let parser = Parser::new("{name} is {age:d} years old").unwrap();
+//! let result = parser.parse("Alice is 30 years old").unwrap().unwrap();
 //!
-//! assert_eq!(result.get("name"), Some("Alice"));
-//! assert_eq!(result.get("age"), Some(30));
+//! assert_eq!(result.get("name").unwrap().as_str(), Some("Alice"));
+//! assert_eq!(result.get("age").unwrap().as_int(), Some(30));
 //! ```
 
+#![forbid(unsafe_code)]
 #![warn(missing_docs)]
 #![warn(missing_debug_implementations)]
 

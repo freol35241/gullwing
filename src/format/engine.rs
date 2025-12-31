@@ -331,7 +331,7 @@ fn format_value(value: &Value, spec: &FormatSpec) -> Result<String> {
         TypeSpec::GeneralLower | TypeSpec::GeneralUpper => format_general(value, spec)?,
         TypeSpec::Percentage => format_percentage(value, spec)?,
         TypeSpec::Character => format_character(value)?,
-        TypeSpec::Number => format_decimal(value, spec)?, // TODO: locale-aware
+        TypeSpec::Number => format_decimal(value, spec)?, // Note: locale-aware 'n' falls back to decimal
     };
 
     // Apply alignment and padding
@@ -424,7 +424,7 @@ mod tests {
         let fields = parse_format_string("{value:05d}").unwrap();
         assert_eq!(fields[0].name, Some("value".to_string()));
         assert_eq!(fields[0].spec.width, Some(5));
-        assert_eq!(fields[0].spec.zero_pad, true);
+        assert!(fields[0].spec.zero_pad);
     }
 
     #[test]

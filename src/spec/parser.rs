@@ -305,14 +305,14 @@ mod tests {
     #[test]
     fn test_alternate_and_zero_pad() {
         let spec = FormatSpec::parse("#").unwrap();
-        assert_eq!(spec.alternate, true);
+        assert!(spec.alternate);
 
         let spec = FormatSpec::parse("0").unwrap();
-        assert_eq!(spec.zero_pad, true);
+        assert!(spec.zero_pad);
 
         let spec = FormatSpec::parse("#0").unwrap();
-        assert_eq!(spec.alternate, true);
-        assert_eq!(spec.zero_pad, true);
+        assert!(spec.alternate);
+        assert!(spec.zero_pad);
     }
 
     #[test]
@@ -375,7 +375,7 @@ mod tests {
     #[test]
     fn test_zero_pad_width() {
         let spec = FormatSpec::parse("05d").unwrap();
-        assert_eq!(spec.zero_pad, true);
+        assert!(spec.zero_pad);
         assert_eq!(spec.width, Some(5));
         assert_eq!(spec.type_spec, Some(TypeSpec::Decimal));
     }
@@ -383,7 +383,7 @@ mod tests {
     #[test]
     fn test_alternate_form() {
         let spec = FormatSpec::parse("#x").unwrap();
-        assert_eq!(spec.alternate, true);
+        assert!(spec.alternate);
         assert_eq!(spec.type_spec, Some(TypeSpec::HexLower));
     }
 }

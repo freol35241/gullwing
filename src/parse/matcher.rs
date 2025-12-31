@@ -302,8 +302,8 @@ mod tests {
     #[test]
     fn test_parse_floats() {
         let parser = Parser::new("{value:f}").unwrap();
-        let result = parser.parse("3.14").unwrap().unwrap();
-        assert_eq!(result.get("value").unwrap().as_float(), Some(3.14));
+        let result = parser.parse("2.5").unwrap().unwrap();
+        assert_eq!(result.get("value").unwrap().as_float(), Some(2.5));
     }
 
     #[test]

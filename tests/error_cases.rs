@@ -91,7 +91,7 @@ mod error_tests {
         values.insert("value".to_string(), Value::from(-42));
 
         // Negative numbers can't be formatted as hex (unsigned operation)
-        let result = formatter.format_map(&values);
+        let _result = formatter.format_map(&values);
         // This might succeed or fail depending on implementation
         // If it succeeds, it should handle the conversion gracefully
     }

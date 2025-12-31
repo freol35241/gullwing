@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.1] - 2025-12-31
+
+This is the first release candidate for v1.0.0. The API is considered stable and ready for production use.
+
+### Changed
+- Version bump to 1.0.0-rc.1 in preparation for stable release
+
+### Added
+- `#![forbid(unsafe_code)]` to enforce zero unsafe code policy
+- MSRV (Minimum Supported Rust Version) set to 1.70
+- Automated release workflow for crates.io publishing
+- SECURITY.md with vulnerability reporting guidelines
+- Comprehensive CLAUDE.md documentation for AI-assisted development
+- MSRV verification in CI pipeline
+
+### Fixed
+- Documentation examples in lib.rs now use correct API
+- All clippy warnings resolved (including MSRV compatibility)
+- CI workflow updated to run clippy on all targets
+
+### Improved
+- CI pipeline now tests on Rust 1.70 (MSRV), stable, and beta
+- GitHub Actions updated to v4
+
 ## [0.9.0] - 2025-11-11
 
 ### Added
@@ -84,6 +108,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Basic format specification support
 - Core formatting and parsing engines
 
-[Unreleased]: https://github.com/freol35241/gullwing/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/freol35241/gullwing/compare/v1.0.0-rc.1...HEAD
+[1.0.0-rc.1]: https://github.com/freol35241/gullwing/releases/tag/v1.0.0-rc.1
 [0.9.0]: https://github.com/freol35241/gullwing/releases/tag/v0.9.0
 [0.1.0]: https://github.com/freol35241/gullwing/releases/tag/v0.1.0

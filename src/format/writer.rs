@@ -298,7 +298,7 @@ fn apply_grouping(s: &str, grouping: Grouping, group_size: usize) -> String {
     let mut result = String::new();
 
     for (i, &c) in chars.iter().enumerate() {
-        if i > 0 && (chars.len() - i).is_multiple_of(group_size) {
+        if i > 0 && (chars.len() - i) % group_size == 0 {
             result.push(sep);
         }
         result.push(c);
@@ -410,8 +410,10 @@ mod tests {
         let spec = FormatSpec::default();
         assert_eq!(format_string(&value, &spec).unwrap(), "hello");
 
-        let mut spec = FormatSpec::default();
-        spec.precision = Some(3);
+        let spec = FormatSpec {
+            precision: Some(3),
+            ..Default::default()
+        };
         assert_eq!(format_string(&value, &spec).unwrap(), "hel");
     }
 
@@ -421,8 +423,10 @@ mod tests {
         let spec = FormatSpec::default();
         assert_eq!(format_decimal(&value, &spec).unwrap(), "42");
 
-        let mut spec = FormatSpec::default();
-        spec.sign = Some(Sign::Plus);
+        let spec = FormatSpec {
+            sign: Some(Sign::Plus),
+            ..Default::default()
+        };
         assert_eq!(format_decimal(&value, &spec).unwrap(), "+42");
 
         let value = Value::from(-42);
@@ -435,8 +439,10 @@ mod tests {
         let spec = FormatSpec::default();
         assert_eq!(format_binary(&value, &spec).unwrap(), "1010");
 
-        let mut spec = FormatSpec::default();
-        spec.alternate = true;
+        let spec = FormatSpec {
+            alternate: true,
+            ..Default::default()
+        };
         assert_eq!(format_binary(&value, &spec).unwrap(), "0b1010");
     }
 
@@ -447,8 +453,10 @@ mod tests {
         assert_eq!(format_hex(&value, &spec, false).unwrap(), "ff");
         assert_eq!(format_hex(&value, &spec, true).unwrap(), "FF");
 
-        let mut spec = FormatSpec::default();
-        spec.alternate = true;
+        let spec = FormatSpec {
+            alternate: true,
+            ..Default::default()
+        };
         assert_eq!(format_hex(&value, &spec, false).unwrap(), "0xff");
         assert_eq!(format_hex(&value, &spec, true).unwrap(), "0XFF");
     }

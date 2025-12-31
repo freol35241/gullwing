@@ -12,7 +12,7 @@ mod integration_tests {
     ) -> Result<String, String> {
         // Build the example first
         let build = Command::new("cargo")
-            .args(&["build", "--example", "shuffle"])
+            .args(["build", "--example", "shuffle"])
             .output()
             .map_err(|e| format!("Failed to build shuffle example: {}", e))?;
 

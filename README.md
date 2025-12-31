@@ -25,7 +25,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-gullwing = "0.1"
+gullwing = "1.0.0-rc.1"
 ```
 
 ## Quick Start

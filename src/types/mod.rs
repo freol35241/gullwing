@@ -193,8 +193,8 @@ mod tests {
         assert_eq!(v.as_float(), Some(42.0));
 
         // Float conversions
-        let v = Value::from(3.14);
-        assert_eq!(v.as_float(), Some(3.14));
+        let v = Value::from(2.5);
+        assert_eq!(v.as_float(), Some(2.5));
 
         // Bool conversions
         let v = Value::from(true);
@@ -210,7 +210,7 @@ mod tests {
     fn test_display() {
         assert_eq!(Value::from("hello").to_string(), "hello");
         assert_eq!(Value::from(42).to_string(), "42");
-        assert_eq!(Value::from(3.14).to_string(), "3.14");
+        assert_eq!(Value::from(2.5).to_string(), "2.5");
         assert_eq!(Value::from(true).to_string(), "true");
         assert_eq!(Value::from('a').to_string(), "a");
     }
